@@ -1,0 +1,23 @@
+header {
+    margin-bottom: 1rem;
+    height: 36px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 1.8rem;
+        color: #3F51B5;
+    }
+    h1 {
+        margin: 0;
+        height: 2rem;
+        line-height: 2rem;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #3F51B5;
+    }
+}

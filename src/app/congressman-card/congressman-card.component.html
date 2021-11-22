@@ -1,0 +1,50 @@
+<mat-card>
+    <mat-card-header (click)="expansionPanel.toggle()">
+        <img mat-card-avatar src="{{congressmanData.urlFoto}}" alt="Foto do deputado {{congressmanData.nome}}" onerror="this.onerror=null; this.src='./assets/DefaultAvatar.jpg'"/>
+        <mat-card-title>{{congressmanData.nome}}</mat-card-title>
+        <mat-card-subtitle>Partido: {{congressmanData.siglaPartido | emptyDash}} | Estado: {{congressmanData.siglaUf | emptyDash}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-expansion-panel #expansionPanel (opened)="showDetailsData()" [togglePosition]="'before'">
+            <mat-expansion-panel-header collapsedHeight="max-content" expandedHeight="max-content">
+                <mat-panel-title>Detalhes</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="detailsArea">
+                <mat-spinner *ngIf="!detailedData; else details" [diameter]=90 color="accent"></mat-spinner>
+                <ng-template #details>
+                    <img src="{{detailedData.urlPhoto}}" alt="Foto do deputado {{detailedData.name}}" onerror="this.onerror=null; this.src='./assets/DefaultAvatar.jpg'"/>
+                    <div>
+                        <div class="detailsText">
+                            <p>Nome completo: <strong>{{detailedData.name | emptyDash}}</strong></p>
+                            <p>Partido: {{detailedData.partyAcronym | emptyDash}} | Estado: {{detailedData.stateAcronym | emptyDash}}</p>
+                            <p>Data de Nascimento: {{detailedData.birthday | date: 'dd/MM/yyyy' | emptyDash}}</p>
+                            <p>Sexo: {{detailedData.gender | gender}}</p>
+                            <p>Email: {{detailedData.email | emptyDash}}</p>
+                            <a [hidden]="!detailedData.webSite" href="{{'http://' + detailedData.webSite}}">Site do deputado</a>
+                        </div>
+                        <div class="eventsArea">
+                            <div>
+                                <mat-spinner *ngIf="!lastEventData; else lastEvent" [diameter]=60 color="accent"></mat-spinner>
+                                <ng-template #lastEvent>
+                                    <p><strong>Último Evento</strong></p>
+                                    <p>Tipo: {{lastEventData.type | emptyDash}}</p>
+                                    <p>Início: {{lastEventData.startDate | date: 'dd/MM/yyyy H:mm' | emptyDash}}</p>
+                                    <p>Término: {{lastEventData.endDate | date: 'dd/MM/yyyy H:mm' | emptyDash}}</p>
+                                </ng-template>
+                            </div>
+                            <div>
+                                <mat-spinner *ngIf="!nextEventData; else nextEvent" [diameter]=60 color="accent"></mat-spinner>
+                                <ng-template #nextEvent>
+                                    <p><strong>Próximo Evento</strong></p>
+                                    <p>Tipo: {{nextEventData.startDate | emptyDash}}</p>
+                                    <p>Situação: {{nextEventData.situation | emptyDash}}</p>
+                                    <p>Início: {{nextEventData.startDate | date: 'dd/MM/yyyy H:mm' | emptyDash}}</p>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </mat-expansion-panel>
+    </mat-card-content>
+</mat-card>

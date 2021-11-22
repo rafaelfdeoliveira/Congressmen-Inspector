@@ -1,0 +1,36 @@
+<form #searchForm="ngForm" [formGroup]="formGroup" (ngSubmit)="showResults(this.formGroup.value)">
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Deputado</mat-label>
+            <input matInput formControlName="congressmanName" placeholder="Digite o nome do Deputado">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Partido</mat-label>
+            <input matInput formControlName="partyAcronym" placeholder="Digite a sigla do Partido">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="stateAcronym">
+                <mat-option selected value=""></mat-option>
+                <mat-option *ngFor="let state of statesData" value="{{state.sigla}}">{{state.nome}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <div>
+            <label for="genderRadioGroup">Sexo</label>
+            <mat-radio-group color="primary" name="genderRadioGroup" formControlName="sex" (change)="searchForm.ngSubmit.emit()">
+                <mat-radio-button value="">Ambos</mat-radio-button>
+                <mat-radio-button value="M">Masculino</mat-radio-button>
+                <mat-radio-button value="F">Feminino</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <button mat-raised-button color="primary" type="submit">Pesquisar</button>
+    </div>
+</form>
+<div class="spinnerArea" *ngIf="loading; else resultsArea">
+    <mat-spinner color="accent"></mat-spinner>
+</div>
+<ng-template #resultsArea>
+    <app-results-area *ngIf="data" [data]="data"></app-results-area>
+</ng-template>

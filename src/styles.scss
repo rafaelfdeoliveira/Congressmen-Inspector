@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+    font-size: clamp(6px, 1vw, 10px);
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 1rem;
+    background-color: #F5F5F5;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

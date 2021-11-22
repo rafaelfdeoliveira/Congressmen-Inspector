@@ -1,0 +1,67 @@
+$cardBackgroundColor: #A0C3FF;
+
+.mat-card {
+    padding: 0.8rem;
+    background-color: $cardBackgroundColor;
+}
+
+.mat-card:hover {
+    box-shadow: 0 0 1rem gray;
+}
+
+.mat-card-header {
+    cursor: pointer;
+}
+
+.mat-card-header-text {
+    margin: 0 1.6rem !important;
+}
+
+.mat-card-title {
+    line-height: 20px;
+    margin: 0 !important;
+}
+
+.mat-card-subtitle {
+    line-height: 14px;
+    margin: 0 !important;
+}
+
+.mat-expansion-panel {
+    background-color: $cardBackgroundColor;
+    box-shadow: none;
+}
+
+.detailsArea {
+    height: 20rem;
+    padding-top: 1rem;
+    display: flex;
+    img {
+        height: 100%;
+        aspect-ratio: 3 / 4;
+    }
+    p {
+        font-size: 1.4rem;
+        margin: 0;
+        line-height: 1.6rem;
+    }
+    & > div {
+        flex-grow: 1;
+        padding-left: 1rem;
+    }
+}
+
+.detailsText {
+    height: 50%;
+    width: 100%;
+}
+
+.eventsArea {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    div {
+        padding-top: 1rem;
+    }
+}

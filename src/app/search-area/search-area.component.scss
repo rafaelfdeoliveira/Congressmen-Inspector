@@ -1,0 +1,44 @@
+form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1rem;
+    font-size: 1.5rem;
+    color: #00000088;
+    * {
+        flex-shrink: 1;
+        flex-grow: 1;
+        min-width: 0;
+        min-height: 0;
+    }
+    & > div {
+        height: 7rem;
+        display: flex;
+        gap: 1rem;
+    }
+    & > div div {
+        box-sizing: border-box;
+        height: 100%;
+        border-radius: 4px;
+        padding: 0.5rem 1rem 1rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .mat-form-field-wrapper {
+        height: 100%;
+        padding: 0;
+    }
+    mat-radio-group {
+        display: flex;
+        gap: 1rem;
+    }
+    button {
+        height: 100%;
+    }
+}
+
+.spinnerArea {
+    display: flex;
+    justify-content: center;
+}
