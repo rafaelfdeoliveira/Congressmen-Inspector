@@ -1,0 +1,32 @@
+<div *ngIf="loading; else expenses">
+    <mat-spinner [diameter]="90" color="accent"></mat-spinner>
+</div>
+<ng-template #expenses>
+    <mat-paginator [length]="totalSize" [pageSize]="pageSize" [hidePageSize]="true" [pageIndex]="currentPage" [showFirstLastButtons]="true" (page)="handlePage($event)" aria-label="Change Page"></mat-paginator>
+    <table matSort mat-table (matSortChange)="sortData($event)" [dataSource]="displayedData">
+        <ng-container matColumnDef="supplierName">
+            <th mat-header-cell *matHeaderCellDef>Nome do Fornecedor</th>
+            <td mat-cell *matCellDef="let expense">{{expense.supplierName | emptyDash}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Tipo</th>
+            <td mat-cell *matCellDef="let expense">{{expense.type | emptyDash | lowercase}}</td>
+        </ng-container>
+        <ng-container matColumnDef="ammount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="ammount" sortActionDescription="Sort by value">Valor</th>
+            <td mat-cell *matCellDef="let expense">{{expense.ammount | currency:'BRL' | emptyDash}}</td>
+          </ng-container>
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="date" sortActionDescription="Sort by data">Data</th>
+            <td mat-cell *matCellDef="let expense">{{expense.date | date: 'dd/MM/yyyy' | emptyDash}}</td>
+          </ng-container>
+        <ng-container matColumnDef="expenseUrl">
+            <th mat-header-cell *matHeaderCellDef>Documento</th>
+            <td mat-cell *matCellDef="let expense">
+                <a *ngIf="expense.expenseUrl" href="{{expense.expenseUrl}}" target="_blank">Link</a>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</ng-template>

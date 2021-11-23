@@ -11,6 +11,20 @@ $cardBackgroundColor: #A0C3FF;
 
 .mat-card-header {
     cursor: pointer;
+    position: relative;
+    a {
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 1.4rem;
+        line-height: 1.4rem;
+        padding: 0.2rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    a:hover {
+        box-shadow: 0 0 1rem gray;
+    }
 }
 
 .mat-card-header-text {
@@ -33,7 +47,7 @@ $cardBackgroundColor: #A0C3FF;
 }
 
 .detailsArea {
-    height: 20rem;
+    height: 22rem;
     padding-top: 1rem;
     display: flex;
     img {
@@ -45,23 +59,31 @@ $cardBackgroundColor: #A0C3FF;
         margin: 0;
         line-height: 1.6rem;
     }
-    & > div {
+    > div {
         flex-grow: 1;
         padding-left: 1rem;
+        display: flex;
+        flex-direction: column;
     }
 }
 
 .detailsText {
-    height: 50%;
+    margin-bottom: 1rem;
+    height: max-content;
     width: 100%;
 }
 
-.eventsArea {
-    height: 50%;
+.bottomArea {
+    flex-grow: 1;
     width: 100%;
     display: flex;
     gap: 1rem;
-    div {
-        padding-top: 1rem;
+    mat-tab-group {
+        width: 100%;
     }
+}
+
+.cardButton {
+    border: none;
+    padding: none;
 }

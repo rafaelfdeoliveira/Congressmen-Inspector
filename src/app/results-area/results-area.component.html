@@ -1,4 +1,4 @@
-<mat-paginator [length]="totalSize" [pageSize]="pageSize" [hidePageSize]="true" [pageIndex]="currentPage" [showFirstLastButtons]="true" (page)="handlePage($event)" aria-label="Change page"></mat-paginator>
+<mat-paginator [length]="totalSize" [pageSize]="pageSize" [hidePageSize]="true" [pageIndex]="currentPage" [showFirstLastButtons]="true" (page)="handlePage($event)" aria-label="Change Page"></mat-paginator>
 <section>
     <app-congressman-card *ngFor="let congressmanData of displayedData" [congressmanData]="congressmanData"></app-congressman-card>
 </section>

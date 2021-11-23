@@ -3,6 +3,7 @@
         <img mat-card-avatar src="{{congressmanData.urlFoto}}" alt="Foto do deputado {{congressmanData.nome}}" onerror="this.onerror=null; this.src='./assets/DefaultAvatar.jpg'"/>
         <mat-card-title>{{congressmanData.nome}}</mat-card-title>
         <mat-card-subtitle>Partido: {{congressmanData.siglaPartido | emptyDash}} | Estado: {{congressmanData.siglaUf | emptyDash}}</mat-card-subtitle>
+        <a routerLink="despesas/{{congressmanData.id}}">Despesas</a>
     </mat-card-header>
     <mat-card-content>
         <mat-expansion-panel #expansionPanel (opened)="showDetailsData()" [togglePosition]="'before'">
@@ -20,27 +21,49 @@
                             <p>Data de Nascimento: {{detailedData.birthday | date: 'dd/MM/yyyy' | emptyDash}}</p>
                             <p>Sexo: {{detailedData.gender | gender}}</p>
                             <p>Email: {{detailedData.email | emptyDash}}</p>
-                            <a [hidden]="!detailedData.webSite" href="{{'http://' + detailedData.webSite}}">Site do deputado</a>
+                            <a [hidden]="!detailedData.webSite" href="{{'http://' + detailedData.webSite}}"><p>Site do deputado</p></a>
                         </div>
-                        <div class="eventsArea">
-                            <div>
-                                <mat-spinner *ngIf="!lastEventData; else lastEvent" [diameter]=60 color="accent"></mat-spinner>
-                                <ng-template #lastEvent>
-                                    <p><strong>Último Evento</strong></p>
-                                    <p>Tipo: {{lastEventData.type | emptyDash}}</p>
-                                    <p>Início: {{lastEventData.startDate | date: 'dd/MM/yyyy H:mm' | emptyDash}}</p>
-                                    <p>Término: {{lastEventData.endDate | date: 'dd/MM/yyyy H:mm' | emptyDash}}</p>
-                                </ng-template>
-                            </div>
-                            <div>
-                                <mat-spinner *ngIf="!nextEventData; else nextEvent" [diameter]=60 color="accent"></mat-spinner>
-                                <ng-template #nextEvent>
-                                    <p><strong>Próximo Evento</strong></p>
-                                    <p>Tipo: {{nextEventData.startDate | emptyDash}}</p>
-                                    <p>Situação: {{nextEventData.situation | emptyDash}}</p>
-                                    <p>Início: {{nextEventData.startDate | date: 'dd/MM/yyyy H:mm' | emptyDash}}</p>
-                                </ng-template>
-                            </div>
+                        <div class="bottomArea">
+                            <mat-tab-group color="accent">
+                                <mat-tab label="Eventos">
+                                    <div>
+                                        <mat-spinner *ngIf="!lastEventData; else lastEvent" [diameter]=60 color="accent"></mat-spinner>
+                                        <ng-template #lastEvent>
+                                            <p><strong>Último Evento</strong></p>
+                                            <p>{{lastEventData.type | emptyDash}}</p>
+                                            <p>Início: {{lastEventData.startDate | date: 'dd/MM/yyyy H:mm' | emptyDash}}</p>
+                                            <p>Término: {{lastEventData.endDate | date: 'dd/MM/yyyy H:mm' | emptyDash}}</p>
+                                        </ng-template>
+                                    </div>
+                                    <div>
+                                        <mat-spinner *ngIf="!nextEventData; else nextEvent" [diameter]=60 color="accent"></mat-spinner>
+                                        <ng-template #nextEvent>
+                                            <p><strong>Próximo Evento</strong></p>
+                                            <p>{{nextEventData.type | emptyDash}}</p>
+                                            <p>Situação: {{nextEventData.situation | emptyDash}}</p>
+                                            <p>Início: {{nextEventData.startDate | date: 'dd/MM/yyyy H:mm' | emptyDash}}</p>
+                                        </ng-template>
+                                    </div>
+                                </mat-tab>
+                                <mat-tab label="Despesas">
+                                    <mat-spinner *ngIf="loadingExpenses; else expenses" [diameter]=60 color="accent"></mat-spinner>
+                                    <ng-template #expenses>
+                                        <div *ngIf="biggestExpenseData">
+                                            <p><strong>Maior Despesa no Ano</strong></p>
+                                            <p>{{biggestExpenseData.type | emptyDash | lowercase}}</p>
+                                            <p>Valor: {{biggestExpenseData.ammount | currency: 'BRL'}}</p>
+                                            <p>Data: {{biggestExpenseData.date | date: 'dd/MM/yyyy' | emptyDash}}</p>
+                                        </div>
+                                        <div *ngIf="expensesData">
+                                            <p><strong>Última Despesa</strong></p>
+                                            <p>{{expensesData[0].type | emptyDash | lowercase}}</p>
+                                            <p>Valor: {{expensesData[0].ammount | currency: 'BRL'}}</p>
+                                            <p>Data: {{expensesData[0].date | date: 'dd/MM/yyyy' | emptyDash}}</p>
+                                        </div>
+                                    </ng-template>
+                                </mat-tab>
+                                <nav mat-tab-nav></nav>
+                            </mat-tab-group>
                         </div>
                     </div>
                 </ng-template>

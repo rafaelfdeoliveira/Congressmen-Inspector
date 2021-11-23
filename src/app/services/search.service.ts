@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DataHandlingService } from './data-handling.service';
 
@@ -48,6 +48,19 @@ export class SearchService {
     })
   }
 
+  // When submitted, it requests the data in the given page in the API (with a maximum of 100 expenses in the page) about all official expenses in the current year made by the congressman corresponding to the given congressmanId
+  getExpensesData(congressmanId: number, page: number) {
+    return this.httpClient.get(this.congressmanDataUrl + congressmanId + '/despesas', {
+      params: {
+        ano: new Date().getFullYear(),
+        pagina: page,
+        itens: 100,
+        ordem: 'DESC',
+        ordenarPor: "dataDocumento"
+      }
+    })
+  }
+
 }
 
 export interface CongressmanData {
@@ -74,4 +87,12 @@ export interface StatesData {
     sigla: string,
     nome: string,
     descricao: string
+}
+
+export interface ExpenseData {
+  type: string,
+  supplierName: string,
+  ammount: number,
+  date: string,
+  expenseUrl: string
 }

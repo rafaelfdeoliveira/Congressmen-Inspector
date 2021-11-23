@@ -9,8 +9,41 @@ html, body {
 }
 
 body {
+    min-width: 360px;
+    box-sizing: border-box;
     margin: 0;
     padding: 1rem;
     background-color: #F5F5F5;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-radio-container, .mat-radio-inner-circle, .mat-radio-outer-circle {
+    width: 2rem !important;
+    height: 2rem !important;
+}
+
+.mat-expansion-panel-content > .mat-expansion-panel-body {
+    padding: 0;
+}
+
+.mat-tab-label {
+    padding: 0 0.5rem 0.5rem 0.5rem !important;
+    height: max-content !important;
+    min-width: 0 !important;
+}
+
+.mat-tab-label-content {
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+}
+
+.mat-tab-body-content {
+    display: flex;
+    position: relative;
+    div {
+        padding-top: 1rem;
+    }
+    div:not(:first-child) {
+        padding-left: 1rem;
+    }
 }

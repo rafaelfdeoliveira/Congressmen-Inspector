@@ -20,9 +20,9 @@
         <div>
             <label for="genderRadioGroup">Sexo</label>
             <mat-radio-group color="primary" name="genderRadioGroup" formControlName="sex" (change)="searchForm.ngSubmit.emit()">
-                <mat-radio-button value="">Ambos</mat-radio-button>
-                <mat-radio-button value="M">Masculino</mat-radio-button>
-                <mat-radio-button value="F">Feminino</mat-radio-button>
+                <mat-radio-button disableRipple="true" value="">Ambos</mat-radio-button>
+                <mat-radio-button disableRipple="true" value="M">Masculino</mat-radio-button>
+                <mat-radio-button disableRipple="true" value="F">Feminino</mat-radio-button>
             </mat-radio-group>
         </div>
         <button mat-raised-button color="primary" type="submit">Pesquisar</button>
